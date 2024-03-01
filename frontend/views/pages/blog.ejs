@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./../blocks/head.ejs', {title: blog.title}) %>
+<body>
+<%- include('./../blocks/header.ejs', {isLoggedIn, isAdmin, language}) %>
+<main class="container my-5">
+    <div class="row">
+        <div class="col-4">
+            <h2 class="fs-2"><%= blog.title %></h2>
+            <h3 class="text-primary"><%= blog.author %></h3>
+        </div>
+        <div class="col">
+            <h4><% if (language==="en") { %> Content <% } else {%> Содержание <% } %>:</h4>
+            <p class="fs-4"><%= blog.content %></p>
+
+
+            <% if (isAdmin === "true") { %>
+                <form id="blogEditForm" class="mt-4">
+                    <h4><% if (language==="en") { %> Edit Blog <% } else {%> Редактировать пост <% } %>:</h4>
+                    <div class="mb-2">
+                        <label for="editTitle" class="form-label"><% if (language==="en") { %> Title <% } else {%> Заголовок <% } %>:</label>
+                        <input type="text" class="form-control" id="editTitle" name="title" value="<%= blog.title %>" required>
+                    </div>
+                    <div class="mb-2">
+                        <label for="editContent" class="form-label">Content:</label>
+                        <textarea class="form-control" id="editContent" name="content" rows="4" required><%= blog.content %></textarea>
+                    </div>
+                    <h5>Image URLs:</h5>
+                    <% blog.url_imgs.forEach(function(img, index) { %>
+                        <div class="mb-2">
+                            <input type="text" class="form-control" name="url_imgs[]" value="<%= img %>" placeholder="Image URL">
+                        </div>
+                    <% }); %>
+                    <button type="button" id="updateBlog" class="btn btn-primary mt-2"><% if (language==="en") { %> Update blog <% } else {%> Обновить пост <% } %></button>
+                </form>
+            <% } %>
+
+            <div class="comments-section mt-4">
+                <h4><% if (language==="en") { %> Comments <% } else {%> Комментарии <% } %>:</h4>
+                <% if (blog.comments && blog.comments.length > 0) { %>
+                    <% blog.comments.forEach(function(comment) { %>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= comment.author %></h5>
+                                <p class="card-text"><%= comment.content %></p>
+                                <% if (comment.createdAt) { %>
+                                    <p class="text-muted"><small><%= new Date(comment.createdAt).toLocaleString() %></small></p>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p><% if (language==="en") { %> No comments yet <% } else {%> Еще ни одного комментария <% } %>.</p>
+                <% } %>
+            </div>
+
+
+
+
+
+
+            <% if (isLoggedIn === "true" && isAdmin === "false") { %>
+                <% if (isVerified === "true") { %>
+                    <div class="comment-form">
+                        <h4><% if (language==="en") { %> Leave a comment <% } else {%> Оставьте комментарий <% } %>:</h4>
+                        <form id="commentForm">
+                            <textarea id="commentContent" class="form-control" placeholder="Your comment" required></textarea>
+                            <button type="submit" class="btn btn-primary mt-2"><% if (language==="en") { %> Post comment <% } else {%> Опубликовать комментарий <% } %></button>
+                        </form>
+                    </div>
+                <% } else { %>
+                    <p class="alert alert-warning"><% if (language==="en") { %>You must be verified to post comments. Please check your email for the verification link <% } else {%> Вы должны быть верифицированы, чтобы оставлять комментарии. Пожалуйста, проверьте свою электронную почту на наличие ссылки для проверки <% } %>
+                        .</p>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+
+
+
+</main>
+<script>
+    document.getElementById("delete")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if(confirm("Are you sure?")) {
+            await fetch(window.location.href, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8"
+                }
+            }).then(res => res.json()).then(window.location.replace("/blogs")).catch(error => console.log(error))
+        }
+    })
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const commentForm = document.getElementById("commentForm");
+        if (commentForm) {
+            commentForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const content = document.getElementById("commentContent").value.trim();
+                if (content) {
+                    const url = window.location.href.replace(/\/$/, "") + "/comments";
+                    try {
+                        const response = await fetch(url, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json; charset=UTF-8"
+                            },
+                            body: JSON.stringify({ content })
+                        });
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok.');
+                        } else {
+                            window.location.reload();
+                        }
+                        const data = await response.json();
+                        console.log(data);
+                        location.reload();
+                    } catch (error) {
+                        console.error("Error posting comment:", error);
+                    }
+                }
+            });
+        }
+    });
+</script>
+<%- include('./../blocks/footer.ejs', {language}) %>
+</body>
+</html>
