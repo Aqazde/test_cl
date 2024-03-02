@@ -8,13 +8,12 @@ homeRoute.get("/", async (req, res) => {
     const book1ImageUrl = book1.data.cover_image;
 
     const book2 = await axios.get('https://freetestapi.com/api/v1/books/5');
-    const book2ImageUrl = book1.data.cover_image;
+    const book2ImageUrl = book2.data.cover_image;
 
     const time = await getTime("Asia", 'Bishkek')
     console.log(time)
 
     const info = await axios.get('https://www.alphavantage.co/query?range=day&function=NEWS_SENTIMENT&tickers=AAPL&limit=1&apikey=6FBHBGH5Z2950D1R');
-    const infoDisplay = info.data.feed.title;
 
     res.render("index", {
         title: "Home",
@@ -24,7 +23,6 @@ homeRoute.get("/", async (req, res) => {
         book1ImageUrl,
         book2ImageUrl,
         time,
-        infoDisplay,
     });
 });
 
