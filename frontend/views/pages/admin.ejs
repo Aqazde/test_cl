@@ -11,14 +11,8 @@
 <body>
 <%- include('../blocks/header.ejs', { isLoggedIn, isAdmin, language,}) %>
 <main class="container my-5">
-    <h1>Admin Panel - User Management</h1>
-
-    <button
-            type="button"
-            class="btn btn-primary mb-3"
-            data-toggle="modal"
-            data-target="#createUserModal"
-    >
+    <h1>Admin Panel</h1>
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#createUserModal">
         Add New User
     </button>
 
@@ -36,29 +30,14 @@
                 <td><%= user.username %></td>
                 <td><%= user.email %></td>
                 <td>
-                    <button
-                            class="btn btn-secondary btn-sm"
-                            data-toggle="modal"
-                            data-target="#editUserModal<%= user._id %>"
-                    >
+                    <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editUserModal<%= user._id %>">
                         Edit
                     </button>
 
-                    <form
-                            action="/admin/users/<%= user._id %>?_method=DELETE"
-                            method="POST"
-                            style="display: inline"
-                    >
-                        <input
-                                type="hidden"
-                                name="_method"
-                                value="DELETE"
-                        />
-                        <button
-                                type="submit"
-                                class="btn btn-danger btn-sm"
-                        >
-                            Delete
+                    <form action="/admin/users/<%= user._id %>?_method=DELETE"
+                          method="POST" style="display: inline">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button type="submit" class="btn btn-danger btn-sm">Delete
                         </button>
                     </form>
                 </td>

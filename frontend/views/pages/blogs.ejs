@@ -6,17 +6,9 @@
 isAdmin}) %>
 <div class="container my-5">
     <div class="text-center my-4">
-        <figure class="blockquote">
-            <blockquote class="blockquote">
-                <p class="mb-0" style="font-style: italic">"<%= quote %>"</p>
-            </blockquote>
-            <figcaption class="blockquote-footer">
-                <cite title="Source Title">Inspiration</cite>
-            </figcaption>
-        </figure>
     </div>
     <h2 class="mb-3 text-bold">
-        <% if (language === "en") { %> All Blogs <% } else { %> Все блоги <% }
+        <% if (language === "en") { %> Reviews <% } else { %> Все рецензии <% }
         %>
     </h2>
     <% if (blogs.length > 0) { %>
@@ -69,8 +61,8 @@ isAdmin}) %>
                             <h5 class="card-title"><%= blog.title %></h5>
                             <p class="card-text"><%= blog.content.substring(0, 100) %>...</p>
                             <a href="/blogs/<%= blog._id %>" class="btn btn-primary mt-auto"
-                            ><% if (language==="en") { %> Read more <% } else {%> Читать
-                                дальше <% } %></a
+                            ><% if (language==="en") { %> Read more <% }
+                                else {%> Еще... <% } %></a
                             >
                         </div>
                     </div>
@@ -79,8 +71,8 @@ isAdmin}) %>
         </div>
     <% } else { %>
         <p>
-            <% if (language==="en") { %> No blog found <% } else {%> Ни найдено ни
-            одного блога <% } %>.
+            <% if (language==="en") { %> No current reviews found <% }
+                else {%> Отсутсвуют опубликованные рецензии <% } %>.
         </p>
     <% } %>
 </div>

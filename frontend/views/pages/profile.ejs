@@ -10,14 +10,11 @@ language}) %>
     </h2>
     <div class="user-info mb-5">
         <h3>
-            <% if (language==="en") { %> Personal Information <% } else {%> Личные
-            данные <% } %>
+            <% if (language==="en") { %> Personal Information <% } else {%> Личные данные <% } %>
         </h3>
         <p>
             <strong
-            ><% if (language==="en") { %> Username <% } else {%> Имя
-                пользователя <% } %>:</strong
-            >
+            ><% if (language==="en") { %> Username <% } else {%> Имя пользователя <% } %>:</strong >
             <%= user.username %>
         </p>
         <p><strong>Email:</strong> <%= user.email %></p>
@@ -39,8 +36,7 @@ language}) %>
 
     <div class="user-comments">
         <h3>
-            <% if (language==="en") { %> My comments <% } else {%> Мои комментарии
-            <% } %>
+            <% if (language==="en") { %> My comments <% } else {%> Мои комментарии <% } %>
         </h3>
         <% if (userComments && userComments.length > 0) { %>
             <ul class="list-group">
@@ -48,15 +44,13 @@ language}) %>
                     <li class="list-group-item">
                         <p>
                             <strong
-                            ><% if (language==="en") { %> Comment on blog <% } else {%>
-                                    Комментарий к блогу <% } %>:</strong
+                            ><% if (language==="en") { %> Comments <% } else {%> Комментарий <% } %>:</strong
                             >
                             <%= comment.blogTitle %>
                         </p>
                         <p>
                             <strong
-                            ><% if (language==="en") { %> Content <% } else {%> Содержание
-                                <% } %>:</strong
+                            ><% if (language==="en") { %> Review content <% } else {%> Содержание рецензии<% } %>:</strong
                             >
                             <%= comment.content %>
                         </p>
@@ -70,8 +64,8 @@ language}) %>
             </ul>
         <% } else { %>
             <p>
-                <% if (language==="en") { %> You have not made any comments yet. <% }
-                else {%> Вы еще не написали ни одного комментария. <% } %>
+                <% if (language==="en") { %> No any comments yet. <% }
+                else {%> Еще ни одного комментария. <% } %>
             </p>
         <% } %>
     </div>

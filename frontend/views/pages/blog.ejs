@@ -16,9 +16,9 @@
 
             <% if (isAdmin === "true") { %>
                 <form id="blogEditForm" class="mt-4">
-                    <h4><% if (language==="en") { %> Edit Blog <% } else {%> Редактировать пост <% } %>:</h4>
+                    <h4><% if (language==="en") { %> Edit Blog <% } else {%> Редактировать рецензию <% } %>:</h4>
                     <div class="mb-2">
-                        <label for="editTitle" class="form-label"><% if (language==="en") { %> Title <% } else {%> Заголовок <% } %>:</label>
+                        <label for="editTitle" class="form-label"><% if (language==="en") { %> Book title <% } else {%> Заголовок книги <% } %>:</label>
                         <input type="text" class="form-control" id="editTitle" name="title" value="<%= blog.title %>" required>
                     </div>
                     <div class="mb-2">
@@ -31,7 +31,9 @@
                             <input type="text" class="form-control" name="url_imgs[]" value="<%= img %>" placeholder="Image URL">
                         </div>
                     <% }); %>
-                    <button type="button" id="updateBlog" class="btn btn-primary mt-2"><% if (language==="en") { %> Update blog <% } else {%> Обновить пост <% } %></button>
+                    <button type="button" id="updateBlog" class="btn btn-primary mt-2">
+                        <% if (language==="en") { %> Update review <% }
+                        else {%> Обновить рецензию <% } %></button>
                 </form>
             <% } %>
 

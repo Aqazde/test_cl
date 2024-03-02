@@ -1,17 +1,17 @@
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-
+import "dotenv/config";
 async function sendVerificationEmail(user, verificationToken, req) {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: process.env.SMTP_EMAIL,
-            pass: process.env.SMTP_PASSWORD,
+            user: 'adil64489@gmail.com',
+            pass: 'fuph yqca sytz vkym',
         },
     });
 
     const mailOptions = {
-        from: process.env.SMTP_EMAIL,
+        from: 'adil64489@gmail.com',
         to: user.email,
         subject: "Verify Your Email",
         html: `<h4>Hello, ${user.first_name}</h4>

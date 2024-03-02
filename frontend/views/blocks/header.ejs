@@ -1,64 +1,48 @@
 <header class="border-bottom border-2 border-primary-subtle text-white">
     <div class="container">
         <nav class="navbar navbar-expand">
-            <h2>Blogging</h2>
+            <h2>AqdeReviewer</h2>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link fs-5 me-3 link-light" href="/"
-                ><% if (language==="en") { %> Home <% } else {%> Главная <% } %>
+                <a class="nav-link fs-5 me-3 link-light" href="/">
+                    <% if (language==="en") { %> Home <% }
+                        else {%> На главную <% } %>
                 </a>
-
                 <% if (isLoggedIn === "true") { %>
-
                     <a class="nav-link fs-5 me-3 link-light" href="/blogs">
-                        <% if (language==="en") { %> Blogs <% } else {%> Блоги <% } %></a
-                    >
+                        <% if (language==="en") { %> All reviews <% }
+                            else {%> Рецензии <% } %></a>
 
                     <% if (isAdmin === "true") { %>
-                        <a class="nav-link fs-5 me-3 link-light" href="/blogs/post"
-                        ><% if (language==="en") { %> Post a blog <% } else {%> Опубликовать
-                            блог <% } %></a
-                        >
-                        <a class="nav-link fs-5 me-3 link-light" href="/admin/users"
-                        ><i
-                            ><% if (language==="en") { %> Admin panel <% } else {%> Админ панель
-                                <% } %></i
-                            ></a
-                        >
+                        <a class="nav-link fs-5 me-3 link-light" href="/blogs/post">
+                            <% if (language==="en") { %> Do a review <% }
+                                else {%> Разместить рецензию <% } %></a>
+                        <a class="nav-link fs-5 me-3 link-light" href="/admin/users">
+                            <i>
+                                <% if (language==="en") { %> Admin panel <% }
+                                    else {%> Панель администратора <% } %></i></a>
                     <% } %>
 
-                    <a class="nav-link fs-5 me-3 link-light" href="/profile"
-                    ><% if (language==="en") { %> Profile <% } else {%> Профиль <% } %></a
-                    >
+                    <a class="nav-link fs-5 me-3 link-light" href="/profile">
+                        <%if (language==="en") { %> Profile <% }
+                        else {%> Профиль <% } %></a>
 
-                    <a class="nav-link fs-5 me-3 link-light" href="/logout"
-                    ><% if (language==="en") { %> Log out <% } else {%> Выйти <% } %></a
-                    >
+                    <a class="nav-link fs-5 me-3 link-light" href="/logout">
+                        <% if (language==="en") { %> Sign out <% }
+                        else {%> Выйти <% } %></a>
+
                 <% } %> <% if (!isLoggedIn) { %>
-                    <a class="nav-link fs-5 me-3 link-light" href="/auth/sign_in"
-                    ><% if (language==="en") { %> Sign In/Up <% } else {%> Войти <% }
-                        %></a
-                    >
+                    <a class="nav-link fs-5 me-3 link-light" href="/auth/sign_in">
+                        <% if (language==="en") { %> Sign up <% }
+                        else {%> Авторизоваться <% }
+                        %></a>
                 <% } %>
 
                 <div id="language-selector" class="d-flex">
-                    <a
-                            href="/language?lang=en"
-                            class="nav-link link-light d-flex align-items-center"
-                    ><img
-                                id="language_en"
-                                src="/imgs/en.png"
-                                width="20"
-                                height="20" />EN</a
-                    >
-                    <a
-                            href="/language?lang=ru"
-                            class="nav-link link-light d-flex align-items-center"
-                    ><img
-                                id="language_ru"
-                                src="/imgs/ru.png"
-                                width="25"
-                                height="25" />RU</a
-                    >
+                    <a href="/language?lang=en" class="nav-link link-light d-flex align-items-center">
+                        <img id="language_en" src="/imgs/en.png" width="20" height="20" />EN</a>
+
+                    <a href="/language?lang=ru" class="nav-link link-light d-flex align-items-center">
+                        <img id="language_ru" src="/imgs/ru.png" width="25" height="25" />RU</a>
                 </div>
             </div>
         </nav>
